@@ -1,6 +1,6 @@
 plugins {
-	id 'org.springframework.boot' version '2.4.1'
-	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+	id 'org.springframework.boot' version '2.2.6.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
 	id 'java'
 }
 
@@ -9,6 +9,10 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
 configurations {
+	developmentOnly
+	runtimeClasspath {
+		extendsFrom developmentOnly
+	}
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
@@ -19,6 +23,7 @@ repositories {
 }
 
 dependencies {
+
 	// https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
 	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.10'
 

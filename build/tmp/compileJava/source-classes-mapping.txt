@@ -1,8 +1,17 @@
+com/project/login/api/controller/exceptionHandler/ApiExceptionHandler.java
+ com.project.login.api.controller.exceptionHandler.ApiExceptionHandler
 com/project/login/Application.java
  com.project.login.Application
+com/project/login/api/controller/exceptionHandler/Problema.java
+ com.project.login.api.controller.exceptionHandler.Problema
+ com.project.login.api.controller.exceptionHandler.Problema$Campo
 com/project/login/domain/repository/UsuarioRepository.java
  com.project.login.domain.repository.UsuarioRepository
 com/project/login/domain/model/Usuario.java
  com.project.login.domain.model.Usuario
+com/project/login/domain/exception/NegocioException.java
+ com.project.login.domain.exception.NegocioException
 com/project/login/api/controller/UsuarioController.java
  com.project.login.api.controller.UsuarioController
+com/project/login/domain/services/UsuarioService.java
+ com.project.login.domain.services.UsuarioService

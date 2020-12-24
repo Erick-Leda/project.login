@@ -2,7 +2,7 @@
 
 --changeset bob:1
 
-CREATE TABLE usuario(
+CREATE TABLE project_login.usuario(
     id bigserial,
     nome varchar (255) not null,
     email varchar (255) not null unique,
@@ -12,7 +12,7 @@ CREATE TABLE usuario(
 );
 
 -- populando tabela usuario
-insert into usuario values (default, 'erick', 'erickleda10@gmail.com', '993884719');
-insert into usuario values (default, 'jorge', 'jorgeleda10@gmail.com', '993475656');
-insert into usuario values (default, 'roberto', 'robertoleda10@gmail.com', '948494986');
-insert into usuario values (default, 'francisco', 'prjr@gmail.com', '984682186');
+insert into project_login.usuario values (default, 'erick', 'erickleda10@gmail.com', '993884719');
+insert into project_login.usuario values (default, 'jorge', 'jorgeleda10@gmail.com', '993475656');
+insert into project_login.usuario values (default, 'roberto', 'robertoleda10@gmail.com', '948494986');
+insert into project_login.usuario values (default, 'francisco', 'prjr@gmail.com', '984682186');
