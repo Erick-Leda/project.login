@@ -1,4 +1,4 @@
-package com.project.login.api.controller.exceptionHandler;
+package com.project.login.api.exceptionHandler;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
@@ -6,8 +6,8 @@ import lombok.Data;
 import java.time.OffsetDateTime;
 import java.util.List;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Problema {
 
     private Integer status;
@@ -17,13 +17,14 @@ public class Problema {
 
     @Data
     public static class Campo{
-     private String nome;
-     private String mensagem;
+        private String nome;
+        private String mensagem;
 
         public Campo(String nome, String mensagem) {
-            super ();
+            super();
             this.nome = nome;
             this.mensagem = mensagem;
         }
     }
+
 }

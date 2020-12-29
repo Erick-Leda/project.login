@@ -2,17 +2,16 @@
 
 --changeset bob:1
 
-CREATE TABLE project_login.usuario(
-    id bigserial,
-    nome varchar (255) not null,
-    email varchar (255) not null unique,
-    telefone varchar (20) not null,
-    primary key (id)
-
+create table project_login.usuario
+(
+    codigo bigserial,
+    nome VARCHAR (50) NOT NULL,
+    email VARCHAR (50) NOT NULL,
+    telefone VARCHAR (50) NOT NULL,
+    senha VARCHAR (150) NOT NULL,
+    primary key (codigo)
 );
 
 -- populando tabela usuario
-insert into project_login.usuario values (default, 'erick', 'erickleda10@gmail.com', '993884719');
-insert into project_login.usuario values (default, 'jorge', 'jorgeleda10@gmail.com', '993475656');
-insert into project_login.usuario values (default, 'roberto', 'robertoleda10@gmail.com', '948494986');
-insert into project_login.usuario values (default, 'francisco', 'prjr@gmail.com', '984682186');
+insert into project_login.usuario values (default, 'erick', 'erickleda10@gmail.com', '993884719','$2a$10$odhsCQ/w59kE8TbvORQM6.ct7UxupItZE2JkjQv6m6AFwDJiRAY6e');
+insert into project_login.usuario values (default, 'francisco', 'prjr@gmail.com', '984682186','$2a$10$odhsCQ/w59kE8TbvORQM6.ct7UxupItZE2JkjQv6m6AFwDJiRAY6e');

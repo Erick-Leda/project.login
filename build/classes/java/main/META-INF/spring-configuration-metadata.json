@@ -1,0 +1,29 @@
+{
+  "groups": [
+    {
+      "name": "algamoney",
+      "type": "com.project.login.config.property.AlgamoneyApiProperty",
+      "sourceType": "com.project.login.config.property.AlgamoneyApiProperty"
+    },
+    {
+      "name": "algamoney.seguranca",
+      "type": "com.project.login.config.property.AlgamoneyApiProperty$Seguranca",
+      "sourceType": "com.project.login.config.property.AlgamoneyApiProperty"
+    }
+  ],
+  "properties": [
+    {
+      "name": "algamoney.origin-permitida",
+      "type": "java.lang.String",
+      "sourceType": "com.project.login.config.property.AlgamoneyApiProperty",
+      "defaultValue": "http:\/\/localhost:8000"
+    },
+    {
+      "name": "algamoney.seguranca.enable-htpps",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.project.login.config.property.AlgamoneyApiProperty$Seguranca",
+      "defaultValue": false
+    }
+  ],
+  "hints": []
+}

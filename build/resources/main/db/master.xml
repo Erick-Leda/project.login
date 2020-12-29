@@ -9,4 +9,12 @@
         <sqlFile path="changelog/202012231858_create_table_usuario.sql" relativeToChangelogFile="true"/>
     </changeSet>
 
+    <changeSet id="202012291640" author="erick" dbms="postgresql">
+        <sqlFile path="changelog/202012291640_create_table_permissao.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="202012291641" author="erick" dbms="postgresql">
+        <sqlFile path="changelog/202012291641_create_table_usuario_permissao.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
 </databaseChangeLog>

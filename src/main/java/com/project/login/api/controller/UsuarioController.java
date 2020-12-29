@@ -1,9 +1,11 @@
 package com.project.login.api.controller;
 
 import com.project.login.domain.model.Usuario;
-import com.project.login.domain.services.UsuarioService;
+import com.project.login.domain.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -17,28 +19,33 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @GetMapping
+    @PreAuthorize("hasAuthority('ROLE_PESQUISAR_USUARIO') and #oauth2.hasScope('read')")
     public List<Usuario> findAll() {
         return usuarioService.findAll();
     }
 
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Usuario> findOne(@PathVariable Long id) {
-        return usuarioService.findOne(id);
+    @GetMapping("/{codigo}")
+    @PreAuthorize("hasAuthority('ROLE_PESQUISAR_USUARIO') and #oauth2.hasScope('read')")
+    public ResponseEntity<Usuario> findOne(@PathVariable Long codigo) {
+        return usuarioService.findOne(codigo);
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasAuthority('ROLE_CADASTRAR_USUARIO') and #oauth2.hasScope('write')")
     public Usuario create(@Valid @RequestBody Usuario usuario) {
-        return usuarioService.create(usuario);
+        return usuarioService.save(usuario);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Usuario> update(@Valid @RequestBody Usuario usuario, @PathVariable Long id) {
-        return usuarioService.update(usuario, id);
+    @PutMapping("/{codigo}")
+    @PreAuthorize("hasAuthority('ROLE_CADASTRAR_USUARIO') and #oauth2.hasScope('write')")
+    public ResponseEntity<Usuario> update(@Valid @RequestBody Usuario usuario, @PathVariable Long codigo) {
+        return usuarioService.update(usuario, codigo);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        return usuarioService.delete(id);
+    @DeleteMapping("/{codigo}")
+    @PreAuthorize("hasAuthority('ROLE_CADASTRAR_USUARIO') and #oauth2.hasScope('write')")
+    public ResponseEntity<Void> delete(@PathVariable Long codigo) {
+        return usuarioService.delete(codigo);
     }
 }

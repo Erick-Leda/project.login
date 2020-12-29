@@ -1,5 +1,6 @@
-package com.project.login.api.controller.exceptionHandler;
+package com.project.login.api.exceptionHandler;
 
+import com.project.login.domain.exception.EntidadeNaoEncontradaException;
 import com.project.login.domain.exception.NegocioException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -24,31 +25,48 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     @Autowired
     private MessageSource messageSource;
 
+    @ExceptionHandler(EntidadeNaoEncontradaException.class)
+    public ResponseEntity<Object> handlerEntidadeNaoEncontrada(NegocioException ex, WebRequest request) {
+        var status = HttpStatus.NOT_FOUND;
+
+        var problema = new Problema();
+        problema.setStatus(status.value());
+        problema.setTitulo(ex.getMessage());
+        problema.setDataHora(OffsetDateTime.now().withNano(0));
+
+        return super.handleExceptionInternal(ex, problema, new HttpHeaders(), status, request);
+    }
+
     @ExceptionHandler(NegocioException.class)
-    public ResponseEntity<Object> handlerNegocio(NegocioException ex, WebRequest request){
+    public ResponseEntity<Object> handlerNegocio(NegocioException ex, WebRequest request) {
         var status = HttpStatus.BAD_REQUEST;
 
         var problema = new Problema();
         problema.setStatus(status.value());
-        problema.setDataHora(OffsetDateTime.now().withNano(0));
         problema.setTitulo(ex.getMessage());
+        problema.setDataHora(OffsetDateTime.now().withNano(0));
 
         return super.handleExceptionInternal(ex, problema, new HttpHeaders(), status, request);
     }
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+
         var campos = new ArrayList<Problema.Campo>();
-        for (ObjectError error: ex.getBindingResult().getAllErrors()) {
-            String nome = ((FieldError)error).getField();
+        for (ObjectError error : ex.getBindingResult().getAllErrors()) {
+
+            String nome = ((FieldError) error).getField();
             String mensagem = messageSource.getMessage(error, LocaleContextHolder.getLocale());
+
             campos.add(new Problema.Campo(nome, mensagem));
         }
+
         var problema = new Problema();
         problema.setStatus(status.value());
-        problema.setCampos(campos);
+        problema.setTitulo("Um ou mais campos estão inválidos. "
+                + "Faça o preenchimento correto e tente novamente");
         problema.setDataHora(OffsetDateTime.now().withNano(0));
-        problema.setTitulo("Um ou mais campos estão inválidos. Faça o preenchimento correto e tente novamente");
+        problema.setCampos(campos);
 
         return super.handleExceptionInternal(ex, problema, headers, status, request);
     }

@@ -1,12 +1,14 @@
 package com.project.login.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import java.util.List;
+
 
 @Entity
 @Table(name = "usuario", schema = "project_login")
@@ -15,19 +17,26 @@ public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long codigo;
 
-    @NotBlank
     @NotNull
+    @NotBlank
     private String nome;
 
-    @NotBlank
+    @NotNull
     @Email
     private String email;
 
-    @Size(max = 15)
-    @NotBlank
     @NotNull
+    @NotBlank
     private String telefone;
+
+    @NotNull
+    private String senha;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "usuario_permissao", schema = "project_login", joinColumns = @JoinColumn(name = "codigo_usuario")
+            , inverseJoinColumns = @JoinColumn(name = "codigo_permissao"))
+    private List<Permissao> permissoes;
 
 }
